@@ -238,14 +238,13 @@ def delete_venue(venue_id):
   # BONUS CHALLENGE: Implement a button to delete a Venue on a Venue Page, have it so that
   # clicking that button delete it from the db then redirect the user to the homepage
   try:
-    venue = db.session.query(Venue).get(venue_id)
-    db.session.delete(venue)
+    Venue.query.filter_by(id=venue_id).delete()
     db.session.commit()
   except:
     db.session.rollback()
     # This will alert User that Venue could not be deleted
-    flash(f'Error. Venue {venue_id} could not be deleted!')
-    #return jsonify({ 'success': False })
+    # flash(f'Error. Venue {venue_id} could not be deleted!')
+    return jsonify({ 'success': False })
   finally:
     # Always close database session.
     db.session.close()
