@@ -147,11 +147,11 @@ def search_venues():
   search_term = request.form.get('search_term')
   venues = Venue.query.filter(Venue.name.ilike(f'%{search_term}%')).all()
 
-  for venue in venues:
-      v = {}
-      v['id'] = venue.id
-      v['name'] = venue.name
-      data.append(v)
+  ffor venue in venues:
+      result = {}
+      result['id'] = venue.id
+      result['name'] = venue.name
+      data.append(result)
 
   response['count'] = len(data)
   response['data'] = data
@@ -281,10 +281,10 @@ def search_artists():
   artists = db.session.query(Artist).filter(Artist.name.ilike('%' + search_term + '%')).all()
 
   for artist in artists:
-      a = {}
-      a['id'] = artist.id
-      a['name'] = artist.name
-      data.append(a)
+      result = {}
+      result['id'] = artist.id
+      result['name'] = artist.name
+      data.append(result)
 
   response['count'] = len(data)
   response['data'] = data
